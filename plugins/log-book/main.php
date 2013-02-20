@@ -77,6 +77,29 @@ function widget_logBook_control($args=array(), $params=array()) {
 	<?php
 }
 
+function get_source($url, $args=array()){
+
+	extract($args);
+	$cookiev = get_option('logBook_widget_cookieValue');
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        //curl_setopt($ch,CURLOPT_COOKIE,'EBBSID=wvbc5hm5mpcarwUgjcgMaMl6');
+        curl_setopt($ch,CURLOPT_COOKIE,$cookiev);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
+        if(curl_exec($ch) === false)
+        {
+        echo 'Curl error: ' . curl_error($ch);
+        }
+        else
+        {
+        $buf2 = curl_exec($ch);
+        }
+
+        curl_close($ch);
+        unset($ch);
+        return $buf2;
+}
 
 add_filter( 'page_template', 'escalas_page_template' );
 function escalas_page_template( $page_template )

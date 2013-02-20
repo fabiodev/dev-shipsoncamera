@@ -12,10 +12,10 @@
 
 
 <?php /* gets the source */
-function get_source($url){
+/*function get_source($url){
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_COOKIE,'EBBSID=HGT2uMonFoMfBUzFciE4TA2J');
+        curl_setopt($ch,CURLOPT_COOKIE,'EBBSID=wvbc5hm5mpcarwUgjcgMaMl6');
         //curl_setopt($ch,CURLOPT_COOKIE,$cookiev);
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
@@ -31,7 +31,7 @@ function get_source($url){
         curl_close($ch);
         unset($ch);
         return $buf2;
-}
+}*/
 
         $loaded = get_source('http://www.portosdamadeira.com/mpcore.php?name=Escalas&file=diarias');
 
