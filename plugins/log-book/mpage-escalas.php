@@ -11,48 +11,25 @@
 <!-- </header> -->
 
 
-<?php /* gets the source */
-/*function get_source($url){
-        $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_COOKIE,'EBBSID=wvbc5hm5mpcarwUgjcgMaMl6');
-        //curl_setopt($ch,CURLOPT_COOKIE,$cookiev);
-	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+<?php 
+	//
+	$tt=apc_fetch('foo');
+	if(isset($tt) && $tt != ""){
+		echo "<div class='alert alert-info'><h4>Attention: ";
+		echo "</h4><p>the information below may contain errors and we don't accept any responsability for the use of such information</p></div>";
+		echo $tt;
+	}else{
 
-        if(curl_exec($ch) === false)
-        {
-        echo 'Curl error: ' . curl_error($ch);
-        }
-        else
-        {
-        $buf2 = curl_exec($ch);
-        }
-
-        curl_close($ch);
-        unset($ch);
-        return $buf2;
-}*/
+	/* gets the source */
 
         $loaded = get_source('http://www.portosdamadeira.com/mpcore.php?name=Escalas&file=diarias');
 
-	//Scraping of the anual schedule needs refinement
-        //$loaded = get_source('http://www.portosdamadeira.com/mpcore.php?name=Escalas&file=anual');
+	 /*loads DOM for scrapping*/
 
-	if(isset($loaded) && $loaded!=""){
-	        //$my_file = get_template_directory().'/temp/portos.html';
-		$my_file = dirname( __FILE__ ).'/temp/portos.html';
-        	$handle = fopen($my_file, 'wr') or die('Cannot open file:  '.$my_file);
-        	fwrite($handle, $loaded);
-	}
+		$html = str_get_html( $loaded);
 
-	 /*starts the scrapping*/
-
-	//Check if source is available & then loads to object "portos"
-		//$portos = get_template_directory()."/temp/portos.html";
-		$portos = dirname( __FILE__ ).'/temp/portos.html';
-		if (file_exists($portos)){
-                
-		$html = file_get_html( $portos );
+		//checks if the source is correct
+		 if(isset($html) && $html != "" && $html->find( '.Table1inner' ) ){
 
 		//Starts table display
 		/*echo*/ $vtable = "<table class='table table-bordered table-hover'>";
@@ -107,26 +84,19 @@
                                         $ii++;
                                  }
 
-				//$vtable .= "<td>".$i."</td>";
-//
-				/*$ii=1;
-                                foreach($TTD->find('td') as $outra){
-					$vtable .= "<td>";
-                                        /*echo*/ //$vtable .= $outra->plaintext;
-                                        /*echo*/ //$vtable .="</td>";
-				 /*}
-				$i++;*/
-                                /*echo*/ //$vtable .= "</tr>";
                         }
                   }
 		/*echo*/ $vtable .= "</table>";
 
-	//Updates "escalas.html" if scrap is succefull
-		if($html->find( '.Table1inner' )){
-		//$file=get_template_directory()."/temp/escalas.html";
-		$file = dirname( __FILE__ ).'/temp/escalas.html';
-		file_put_contents($file, $vtable, LOCK_EX);
-		}
+		//stores into cache and defines array
+                apc_store('foo', $vtable, 420);
+                $tt=apc_fetch('foo');
+
+	//Updates cache ("escalas.html" is deprecated), if scrap is succefull
+		/*if($html->find( '.Table1inner' ) && $cahe_e==1){
+		apc_store('foo', $vtable, 420);
+		$tt=apc_fetch('foo');
+		}*/
 
 		$html->clear(); 
 		unset($html);
@@ -135,18 +105,17 @@
 
 	//If "escalas.txt" exists include and display
 		//if(file_exists(get_template_directory()."/temp/escalas.html")){
-		if(file_exists(dirname( __FILE__ )."/temp/portos.html")){
-			echo "<div class='alert alert-info'><h4>Last updated at: ";
-			//echo date ("d F Y - H:i:s.", filemtime(get_template_directory()."/temp/escalas.html"));
-                        echo date ("d F Y - H:i:s.", filemtime(dirname(__FILE__)."/temp/escalas.html"));
-			echo "</h4></div>";
-			//require(get_template_directory()."/temp/escalas.html");
-			require(dirname( __FILE__ ).'/temp/escalas.html');
+		if(isset($tt) && $tt != ""){
+			echo "<div class='alert alert-info'><h4>Attention: ";
+			echo "</h4><p>the information below may contain errors and we don't accept any responsability for the use of such information</p></div>";
+			echo $tt;
 		}else{
 	//Display error in faillure to load source
 		echo "<div class='alert alert-error'>Oh Snap! Something went wrong I wonder what..</div>";
 
 		}
+	}
+
 
                 ?>
 <div class="alert">

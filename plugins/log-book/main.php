@@ -21,8 +21,6 @@ function widget_logBook($args=array(), $params=array()) {
 
   echo $before_title.$widgettitle.$after_title;
 
-  //$file = plugins_url('log-book/escalas.txt');
-        //require('escalas.txt');
         require('page-escalas.php');
 
   echo $after_widget;
@@ -77,27 +75,32 @@ function widget_logBook_control($args=array(), $params=array()) {
 	<?php
 }
 
-function get_source($url, $args=array()){
+function get_source(){
+	//testing cookie
 
-	extract($args);
-	$cookiev = get_option('logBook_widget_cookieValue');
-        $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,$url);
-        //curl_setopt($ch,CURLOPT_COOKIE,'EBBSID=wvbc5hm5mpcarwUgjcgMaMl6');
-        curl_setopt($ch,CURLOPT_COOKIE,$cookiev);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+	$cr = curl_init('http://www.portosdamadeira.com/index2.php?t=1&l=pt');
+	curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($cr, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
+	curl_exec($cr);
+	curl_close($cr);
 
-        if(curl_exec($ch) === false)
+	// Envia os cookies e faz request
+	$cr = curl_init('http://www.portosdamadeira.com/mpcore.php?name=Escalas&file=diarias');
+	curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($cr, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
+	$buf2 = curl_exec($cr);
+
+        if(curl_exec($cr) === false)
         {
-        echo 'Curl error: ' . curl_error($ch);
+        echo 'Curl error: ' . curl_error($cr);
         }
         else
         {
-        $buf2 = curl_exec($ch);
+        $buf2 = curl_exec($cr);
         }
 
-        curl_close($ch);
-        unset($ch);
+        curl_close($cr);
+        unset($cr);
         return $buf2;
 }
 

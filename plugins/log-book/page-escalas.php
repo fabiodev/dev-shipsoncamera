@@ -1,12 +1,24 @@
+<?php 
 
-                <?php 
+
+        //Scraping of the anual schedule needs refinement
+        $loaded = get_source();
+
+	if(isset($loaded) && $loaded!=""){
+		/*$my_file = get_template_directory().'/temp/portos.html';
+		$my_file = dirname( __FILE__ ).'/temp/portos.html';
+		$handle = fopen($my_file, 'wr') or die('Cannot open file:  '.$my_file);
+		fwrite($handle, $loaded);*/
+		$html =str_get_html($loaded);
+	}
+
 
 	//Check if source is available & then loads to object "portos"
-		if (file_exists(dirname(__FILE__)."/temp/portos.html")){
-                $portos = dirname(__FILE__)."/temp/portos.html";
+		/*if (file_exists(dirname(__FILE__)."/temp/portos.html")){
+                $portos = dirname(__FILE__)."/temp/portos.html";*/
                 //$portos = get_template_directory().'/temp/portos.html';
 
-		$html = file_get_html( $portos );
+		//$html = file_get_html( $portos );
 
 		if($html!=''){
 
@@ -39,9 +51,7 @@
                         }
                   }
 		echo "</table></a>";
-	}
 	}else{
-	$ttable = file_get_contents('escalas.txt');
 	echo $ttable;
 	}
 
