@@ -13,7 +13,7 @@
 
 <?php 
 	//
-	$tt=apc_fetch('foo');
+	$tt=apc_fetch('lbook_page');
 	if(isset($tt) && $tt != ""){
 		echo "<div class='alert alert-info'><h4>Attention: ";
 		echo "</h4><p>the information below may contain errors and we don't accept any responsability for the use of such information</p></div>";
@@ -21,37 +21,28 @@
 	}else{
 
 	/* gets the source */
-
-        $loaded = get_source('http://www.portosdamadeira.com/mpcore.php?name=Escalas&file=diarias');
-
+	$loaded =get_source();
 	 /*loads DOM for scrapping*/
-
 		$html = str_get_html( $loaded);
 
 		//checks if the source is correct
 		 if(isset($html) && $html != "" && $html->find( '.Table1inner' ) ){
 
-		//Starts table display
-		/*echo*/ $vtable = "<table class='table table-bordered table-hover'>";
-		/*echo*/ $vtable .= "<tr class='success'> <th>Navio</th> <th>Chegada</th> <th>Partida</th> <th>Origem</th> <th>Escala</th> <th>Destino</th> <th>Detalhes</th></tr>";
+		//Starts table construction
+		$vtable = "<table class='table table-bordered table-hover'>";
+		$vtable .= "<tr class='success'> <th>Navio</th> <th>Chegada</th> <th>Partida</th> <th>Origem</th> <th>Escala</th> <th>Destino</th> <th>Detalhes</th></tr>";
 		foreach( $html->find( '.Table1inner' ) as $el ){ 
                         $strr= $el->find('table', 0);
 			$i=1;
                         foreach( $strr->find('tr') as $TTD ){
-                                /*echo*/ //$vtable .="<tr>";
-				
-				/*echo*/ //$vtable .= "<td>".$i."</td>";
-
-
                                 $ii=1;
                                 foreach($TTD->find('td') as $outra){
                                         if($ii==5 && $outra->plaintext=="Funchal"){
-                                        /*echo*/ $vtable .="<tr class='info'>";
-
+                                        	$vtable .="<tr class='info'>";
                                			 foreach($TTD->find('td') as $outra){
                                         		$vtable .= "<td>";
-                                        		/*echo*/ $vtable .= $outra->plaintext;
-                                        		/*echo*/ $vtable .="</td>";
+                                        		$vtable .= $outra->plaintext;
+                                        		$vtable .="</td>";
                                  		}
 						$vtable .= "</tr>";
 						$i++;
@@ -61,8 +52,8 @@
 
                                 		foreach($TTD->find('td') as $outra){
                                         		$vtable .= "<td>";
-                                        		/*echo*/ $vtable .= $outra->plaintext;
-                                        		/*echo*/ $vtable .="</td>";
+                                        		$vtable .= $outra->plaintext;
+                                        		$vtable .="</td>";
 						$i++;
                                  		}
 						$vtable .= "</tr>";
@@ -73,12 +64,11 @@
 
                                                 foreach($TTD->find('td') as $outra){
                                                         $vtable .= "<td>";
-                                                        /*echo*/ $vtable .= $outra->plaintext;
-                                                        /*echo*/ $vtable .="</td>";
+                                                        $vtable .= $outra->plaintext;
+                                                        $vtable .="</td>";
 						$i++;
                                                 }
                                                 $vtable .= "</tr>";
-
                                         }
 
                                         $ii++;
@@ -86,31 +76,24 @@
 
                         }
                   }
-		/*echo*/ $vtable .= "</table>";
+		$vtable .= "</table>";
 
 		//stores into cache and defines array
-                apc_store('foo', $vtable, 420);
-                $tt=apc_fetch('foo');
-
-	//Updates cache ("escalas.html" is deprecated), if scrap is succefull
-		/*if($html->find( '.Table1inner' ) && $cahe_e==1){
-		apc_store('foo', $vtable, 420);
-		$tt=apc_fetch('foo');
-		}*/
+                apc_store('lbook_page', $vtable, 420);
+                $tt=apc_fetch('lbook_page');
 
 		$html->clear(); 
 		unset($html);
 
 		}
 
-	//If "escalas.txt" exists include and display
-		//if(file_exists(get_template_directory()."/temp/escalas.html")){
+	//If cache exists display content
 		if(isset($tt) && $tt != ""){
 			echo "<div class='alert alert-info'><h4>Attention: ";
 			echo "</h4><p>the information below may contain errors and we don't accept any responsability for the use of such information</p></div>";
 			echo $tt;
 		}else{
-	//Display error in faillure to load source
+	//Display error in faillure to load cache
 		echo "<div class='alert alert-error'>Oh Snap! Something went wrong I wonder what..</div>";
 
 		}

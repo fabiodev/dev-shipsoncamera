@@ -21,7 +21,7 @@ function widget_logBook($args=array(), $params=array()) {
 
   echo $before_title.$widgettitle.$after_title;
 
-        require('page-escalas.php');
+        require('log_book_widget.php');
 
   echo $after_widget;
 }
@@ -76,18 +76,19 @@ function widget_logBook_control($args=array(), $params=array()) {
 }
 
 function get_source(){
-	//testing cookie
 
+	$cookies = WP_PLUGIN_DIR.'/log-book/cookies.txt';
+	//geting cookie
 	$cr = curl_init('http://www.portosdamadeira.com/index2.php?t=1&l=pt');
 	curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($cr, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
+	curl_setopt($cr, CURLOPT_COOKIEFILE, $cookies);
 	curl_exec($cr);
 	curl_close($cr);
 
 	// Envia os cookies e faz request
 	$cr = curl_init('http://www.portosdamadeira.com/mpcore.php?name=Escalas&file=diarias');
 	curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($cr, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
+	curl_setopt($cr, CURLOPT_COOKIEFILE, $cookies);
 	$buf2 = curl_exec($cr);
 
         if(curl_exec($cr) === false)
@@ -108,7 +109,7 @@ add_filter( 'page_template', 'escalas_page_template' );
 function escalas_page_template( $page_template )
 {
     if ( is_page( 'escalas' ) ) {
-        $page_template = dirname( __FILE__ ) . '/mpage-escalas.php';
+        $page_template = dirname( __FILE__ ) . '/log_book_page.php';
     }
     return $page_template;
 }
