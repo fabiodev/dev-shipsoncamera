@@ -42,6 +42,7 @@
                         }
                   }
 		$short_table .= "</table></a>";
+		$short_table .= "<a class='btn btn-mini btn-success' style='margin-left:34%' href=/index.php/escalas/>Mais detalhes >></a>";
 
                 //stores into cache and defines array
                 apc_store('lbook_widget', $short_table, 420);
