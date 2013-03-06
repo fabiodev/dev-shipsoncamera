@@ -15,7 +15,7 @@
 
 		//Starts table display
 		$lpage = get_bloginfo('url');
-		$short_table = "<a href=".$lpage."/index.php/escalas/><table class='table table-bordered table-hover'>";
+		$short_table = "<a href=".$lpage."/index.php/escalas/><table class='table table-hover'>";
 		$short_table .= "<tr class='success'> <th> ID</th> <th>Navio</th> <th>Chegada</th> </tr>";
 		foreach( $html->find( '.Table1inner' ) as $el ){ 
                         $strr= $el->find('table', 0);
@@ -58,7 +58,8 @@
                         echo $tt;
                 }else{
         //Display error in faillure to load cache
-                echo "<div class='alert alert-error'>Oh Snap! Something went wrong I wonder what..</div>";
+                echo "<div class='alert alert-error'><p>Oh Snap! Something went wrong I wonder what..</p>";
+		echo "<p>Try to reload this page. If this message pressists try again later or report the problem.</p></div>";
 
                 }
 	}

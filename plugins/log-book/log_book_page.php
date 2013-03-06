@@ -16,7 +16,7 @@
 	$tt=apc_fetch('lbook_page');
 	if(isset($tt) && $tt != ""){
 		echo "<div class='alert alert-info'><h4>Attention: ";
-		echo "</h4><p>the information below may contain errors and we don't accept any responsability for the use of such information</p></div>";
+		echo "</h4><p>the information below may not be accurate and we don't accept any responsability for the use of such information</p></div>";
 		echo $tt;
 	}else{
 
@@ -90,11 +90,12 @@
 	//If cache exists display content
 		if(isset($tt) && $tt != ""){
 			echo "<div class='alert alert-info'><h4>Attention: ";
-			echo "</h4><p>the information below may contain errors and we don't accept any responsability for the use of such information</p></div>";
+			echo "</h4><p>the information below may not be accurate and we don't accept any responsability for the use of such information</p></div>";
 			echo $tt;
 		}else{
 	//Display error in faillure to load cache
-		echo "<div class='alert alert-error'>Oh Snap! Something went wrong I wonder what..</div>";
+		echo "<div class='alert alert-error'><p>Oh Snap! Something went wrong I wonder what..</p>";
+		echo "<p> Try to reload this pag. If this message presists try again later or report the problem in the comments or by mail.</p></div>";
 
 		}
 	}

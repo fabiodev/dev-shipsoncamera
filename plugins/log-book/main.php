@@ -82,6 +82,8 @@ function get_source(){
 	$cr = curl_init('http://www.portosdamadeira.com/index2.php?t=1&l=pt');
 	curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($cr, CURLOPT_COOKIEFILE, $cookies);
+	curl_setopt($cr, CURLOPT_CONNECTTIMEOUT, 2);
+	curl_setopt($cr, CURLOPT_TIMEOUT, 2);
 	curl_exec($cr);
 	curl_close($cr);
 
@@ -89,6 +91,8 @@ function get_source(){
 	$cr = curl_init('http://www.portosdamadeira.com/mpcore.php?name=Escalas&file=diarias');
 	curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($cr, CURLOPT_COOKIEFILE, $cookies);
+	curl_setopt($cr, CURLOPT_CONNECTTIMEOUT, 2);
+	curl_setopt($cr, CURLOPT_TIMEOUT, 2);
 	$buf2 = curl_exec($cr);
 
         if(curl_exec($cr) === false)
