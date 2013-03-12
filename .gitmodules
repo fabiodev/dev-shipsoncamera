@@ -1,0 +1,3 @@
+[submodule "plugins/log-book"]
+	path = plugins/log-book
+	url = git@github.com:fabiodev/log-book.git
