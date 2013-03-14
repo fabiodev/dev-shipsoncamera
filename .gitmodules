@@ -1,6 +1,6 @@
-[submodule "plugins/log-book"]
-	path = plugins/log-book
-	url = git@github.com:fabiodev/log-book.git
-[submodule "themes/booty-ships_child"]
-	path = themes/booty-ships_child
-	url = git@github.com:fabiodev/booty.git
+[submodule "themes/booty"]
+	path = themes/booty
+	url = https://github.com/fabiodev/booty.git
+[submodule "plugins/log-book-plugin"]
+	path = plugins/log-book-plugin
+	url = https://github.com/fabiodev/log-book.git
