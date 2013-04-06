@@ -2,6 +2,7 @@
 
 <ul>
 	<li>Submodules:</li>
-	<ul><li>Booty</li>
+	<ul>
+	<li>Booty</li>
 	<li>Log-book</li></ul>
 </ul>
