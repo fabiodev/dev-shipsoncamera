@@ -2,6 +2,6 @@
 
 <ul>
 	<li>Submodules:</li>
-	<li>Booty</li>
-	<li>Log-book</li>
+	<ul><li>Booty</li>
+	<li>Log-book</li></ul>
 </ul>
