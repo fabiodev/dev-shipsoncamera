@@ -1,6 +1,7 @@
-<h2>This is the Ships On Camera project"</h2>
+<h2>This is the source of the Ships On Camera project"</h2>
 
 <p></p>
+
 <ul>
 	<li>Submodules:</li>
 	<ul>
