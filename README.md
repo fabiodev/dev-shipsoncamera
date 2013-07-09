@@ -5,7 +5,7 @@
 <ul>
 	<li>Submodules:</li>
 	<ul>
-	<li>Booty</li>
-	<li>Log-book</li>
+	<li>Theme: Booty</li>
+	<li>Plugin: Log-book</li>
 	</ul>
 </ul>
