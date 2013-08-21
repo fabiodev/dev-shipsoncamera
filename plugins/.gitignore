@@ -1,0 +1,5 @@
+#ignored files
+hello.php
+
+#ignored folders
+akismet/*
