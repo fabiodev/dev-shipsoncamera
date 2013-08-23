@@ -6,4 +6,4 @@
 	url = https://github.com/fabiodev/log-book.git
 [submodule "plugins/ad-soc"]
 	path = plugins/ad-soc
-	url = git@github.com:fabiodev/ad-soc.git
+	url = https://github.com/fabiodev/ad-soc.git
