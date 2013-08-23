@@ -4,3 +4,6 @@
 [submodule "plugins/log-book"]
 	path = plugins/log-book
 	url = https://github.com/fabiodev/log-book.git
+[submodule "plugins/ad-soc"]
+	path = plugins/ad-soc
+	url = https://github.com/fabiodev/ad-soc.git
