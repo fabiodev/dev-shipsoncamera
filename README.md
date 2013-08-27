@@ -1,4 +1,4 @@
-<h2>This is the Ships On Camera blog project source"</h2>
+<h2>Ships On Camera blog project source"</h2>
 
 <ul>
 	<li>Submodules:</li>
