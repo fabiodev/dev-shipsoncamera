@@ -1,5 +1,9 @@
-{
-    "type": "Wordpress",
-    "version": "3.9.1",
-    "address": "shipsoncamera.com"
-}
+[
+    {
+        "type": "Wordpress",
+        "settings": {
+            "version": "3.9.1",
+            "address": "shipsoncamera.com"
+        }
+    }
+]
