@@ -2,7 +2,7 @@
     {
         "type": "Wordpress",
         "settings": {
-            "version": "4.4.2",
+            "version": "4.4.1",
             "address": "shipsoncamera.com"
         }
     }
